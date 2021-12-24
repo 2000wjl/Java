@@ -1,4 +1,4 @@
-package com.zyhwjl.jdbc;
+package com.zyhwjl.jdbc.jdbc1_connection;
 
 import org.junit.Test;
 
@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionTest {
