@@ -101,6 +101,13 @@ public class BaseDao {
         return null;
     }
 
+    /**
+    * @Description: 对于。。的测试--》通用的查询操作，用于返回数据表中的多条记录构成的集合（version 2.0：考虑上事务）
+    * @Param: []
+    * @return: void
+    * @Author: ZYHWJL
+    * @Date: 2021/12/26
+    */
     @Test
     public void querylistTest() throws Exception {
         Connection conn = null;
@@ -108,7 +115,7 @@ public class BaseDao {
             conn = getConnection();
             Customer customer = new Customer();
             String sql = "select id,name,email,birth from customers where 1 = ?";
-            System.out.println(querylist(customer.getClass(),conn,sql, 1));
+            querylist(customer.getClass(),conn,sql, 1).forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
@@ -122,8 +129,6 @@ public class BaseDao {
         }
     }
 
-
-
     // 通用的查询操作，用于返回数据表中的多条记录构成的集合（version 2.0：考虑上事务）
     public <T> List<T> querylist(Class<T> clazz, Connection conn, String sql, Object...args) throws Exception {
         PreparedStatement ps = null;
@@ -135,8 +140,8 @@ public class BaseDao {
             }
             rs = ps.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
-            if(rs.next()){
-                ArrayList<T> list = new ArrayList<>();
+            ArrayList<T> list = new ArrayList<>();
+            while(rs.next()){
                 T t = clazz.newInstance();
                 for (int i = 0; i < rsmd.getColumnCount(); i++) {
                     Object columnValue = rs.getObject(i + 1);
@@ -144,10 +149,10 @@ public class BaseDao {
                     Field field = t.getClass().getDeclaredField(columnName);
                     field.setAccessible(true);
                     field.set(t,columnValue);
-                    list.add(t);
                 }
-                return list;
+                list.add(t);
             }
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
