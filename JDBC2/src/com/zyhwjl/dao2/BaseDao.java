@@ -1,9 +1,11 @@
-package com.zyhwjl.dao;
+package com.zyhwjl.dao2;
 
+import com.zyhwjl.dao.Customer;
 import org.junit.Test;
 
-import java.beans.Customizer;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,18 @@ import static com.zyhwjl.utils.JDBCUtils.getConnection;
  * @Author : ZYHWJL E-mail:zyhwjl@zyhwjl.cn
  * @Date : 2021/12/25 17:48
  */
-public abstract class BaseDao {
+public abstract class BaseDao<T> {
+
+    private Class<T> clazz = null;
+
+    {
+        Type genericSuperclass = this.getClass().getGenericSuperclass();
+        ParameterizedType paramtype = (ParameterizedType) genericSuperclass;
+
+        Type[] actualTypeArguments = paramtype.getActualTypeArguments();
+        clazz = (Class<T>) actualTypeArguments[0];
+    }
+
     // 通用的增删改操作---version 2.0 （考虑上事务）
     public <T> void update(Connection conn, String sql, Object...args) throws Exception {
         PreparedStatement ps = null;
@@ -33,38 +46,9 @@ public abstract class BaseDao {
         }
     }
 
-    /**
-    * @Description: 对于。。的测试---》通用的查询操作，用于返回数据表中的一条记录（version 2.0：考虑上事务）
-    * @Param: []
-    * @return: void
-    * @Author: ZYHWJL
-    * @Date: 2021/12/25
-    */
-    @Test
-    public void query1Test() throws Exception {
-        Connection conn = null;
-        try {
-            conn = getConnection();
-            String sql = "select id,name,email,birth from customers where id = ?";
-            Customer customer = new Customer();
-
-            System.out.println(query1(customer.getClass(),conn,sql,1));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                if (conn!=null)
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-    }
 
     // 通用的查询操作，用于返回数据表中的一条记录（version 2.0：考虑上事务）
-    public <T> T query1(Class<T> clazz,Connection conn,String sql,Object...args){
+    public T query1(Connection conn,String sql,Object...args){
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -101,36 +85,9 @@ public abstract class BaseDao {
         return null;
     }
 
-    /**
-    * @Description: 对于。。的测试--》通用的查询操作，用于返回数据表中的多条记录构成的集合（version 2.0：考虑上事务）
-    * @Param: []
-    * @return: void
-    * @Author: ZYHWJL
-    * @Date: 2021/12/26
-    */
-    @Test
-    public void querylistTest() throws Exception {
-        Connection conn = null;
-        try {
-            conn = getConnection();
-            Customer customer = new Customer();
-            String sql = "select id,name,email,birth from customers where 1 = ?";
-            querylist(customer.getClass(),conn,sql, 1).forEach(System.out::println);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-
-            try {
-                if(conn!=null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     // 通用的查询操作，用于返回数据表中的多条记录构成的集合（version 2.0：考虑上事务）
-    public <T> List<T> querylist(Class<T> clazz, Connection conn, String sql, Object...args) throws Exception {
+    public List<T> querylist(Connection conn, String sql, Object...args) throws Exception {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -170,6 +127,60 @@ public abstract class BaseDao {
         return null;
     }
 
+
+//    //用于查询特殊值的通用的方法
+    public <E> E QueryAny(Connection conn,String sql,Object...args) {
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(sql);
+            for (int i = 0; i < args.length; i++) {
+                ps.setObject(i+1,args[i]);
+            }
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                Object object = rs.getObject(1);
+                return (E) object;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            CloseResource(null,ps);
+        }
+        return null;
+
+    }
+
+    /**
+     * @Description: 对于。。的测试---》通用的查询操作，用于返回数据表中的一条记录（version 2.0：考虑上事务）
+     * @Param: []
+     * @return: void
+     * @Author: ZYHWJL
+     * @Date: 2021/12/25
+     */
+    @Test
+    public void query1Test() throws Exception {
+        Connection conn = null;
+        try {
+            conn = getConnection();
+            String sql = "select id,name,email,birth from customers where id = ?";
+            Customer customer = new Customer();
+
+            System.out.println(query1(conn,sql,1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (conn!=null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+
     /**
      * @Description: 对于。。的测试--》用于查询特殊值的通用的方法
      * @Param: []
@@ -192,27 +203,31 @@ public abstract class BaseDao {
         }
     }
 
-//    //用于查询特殊值的通用的方法
-    public <E> E QueryAny(Connection conn,String sql,Object...args) {
-
-        PreparedStatement ps = null;
+    /**
+     * @Description: 对于。。的测试--》通用的查询操作，用于返回数据表中的多条记录构成的集合（version 2.0：考虑上事务）
+     * @Param: []
+     * @return: void
+     * @Author: ZYHWJL
+     * @Date: 2021/12/26
+     */
+    @Test
+    public void querylistTest() throws Exception {
+        Connection conn = null;
         try {
-            ps = conn.prepareStatement(sql);
-            for (int i = 0; i < args.length; i++) {
-                ps.setObject(i+1,args[i]);
-            }
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                Object object = rs.getObject(1);
-                return (E) object;
-            }
+            conn = getConnection();
+            Customer customer = new Customer();
+            String sql = "select id,name,email,birth from customers where 1 = ?";
+            querylist(conn,sql, 1).forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
+        }finally {
 
-            CloseResource(null,ps);
+            try {
+                if(conn!=null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-        return null;
-
     }
 }

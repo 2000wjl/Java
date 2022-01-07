@@ -7,7 +7,7 @@ import java.util.Date;
  * @Author : ZYHWJL E-mail:zyhwjl@zyhwjl.cn
  * @Date : 2021/12/24 13:58
  */
-public class Customer {
+public class Customer {                                                     
     int id;
     String name;
     String email;
