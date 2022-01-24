@@ -1,9 +1,13 @@
 # JavaStudy
 
 #### 介绍
-Java JDBC部分自学代码。
+Java 
+JDBC部分自学代码。
 学习课程
 [尚硅谷-宋红康老师-JDBC-Bilibili](https://www.bilibili.com/video/BV1eJ411c7rf)
+
+JDBC部分：学习JDBC原生对于数据库的连接、操作、事务处理、关闭
+JDBC2部分：学习规范化代码的层级关系，C3P0、DBCP、Druid数据库连接池技术的优点，DBUtils类对资源的关闭
 
 #### 软件架构
 软件架构说明
