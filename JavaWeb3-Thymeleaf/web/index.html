@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>姓名</th>
+        <th>密码</th>
+        <th>操作</th>
+    </tr>
+    <tr th:if="${#lists.isEmpty(session.Customers)}">
+        <td colspan="3">对不起，无结果。</td>
+    </tr>
+    <tr th:unless="${#lists.isEmpty(session.Customers)}" th:each="customers:${session.Customers}">
+        <!--        <td><a th:text="${customers.getName()}" th:href="@{'/edit.do?id='+${customers.getId()}}"></a></td>-->
+        <td>
+            <a th:text="${customers.getName()}" th:href="@{/edit.do(id=${customers.getId()})}"></a>
+        </td>
+        <td>
+            <a th:text="${customers.getPassword()}" href=""></a>
+        </td>
+        <td>
+            <a th:href="@{/delete.do(id=${customers.getId()})}">删除</a>
+        </td>
+    </tr>
+    <tr>
+        <form th:action="@{/add.do}" method="post">
+            <td>
+                <input type="text" name="name">
+            </td>
+            <td>
+                <input type="password" name="password">
+            </td>
+            <td>
+                <input type="submit" name="" id="" value="添加">
+            </td>
+        </form>
+    </tr>
+
+</table>
+</body>
+</html>

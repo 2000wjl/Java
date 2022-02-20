@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/JDBC/JDBC.iml" filepath="$PROJECT_DIR$/JDBC/JDBC.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JDBC1/JDBC1.iml" filepath="$PROJECT_DIR$/JDBC1/JDBC1.iml" />
       <module fileurl="file://$PROJECT_DIR$/JDBC2/JDBC2.iml" filepath="$PROJECT_DIR$/JDBC2/JDBC2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/java-study.iml" filepath="$PROJECT_DIR$/.idea/java-study.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Java.iml" filepath="$PROJECT_DIR$/.idea/Java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaWeb1-Begin/JavaWeb1-Begin.iml" filepath="$PROJECT_DIR$/JavaWeb1-Begin/JavaWeb1-Begin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaWeb2-Servlet/JavaWeb2-Servlet.iml" filepath="$PROJECT_DIR$/JavaWeb2-Servlet/JavaWeb2-Servlet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaWeb3-Thymeleaf/JavaWeb3-Thymeleaf.iml" filepath="$PROJECT_DIR$/JavaWeb3-Thymeleaf/JavaWeb3-Thymeleaf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaWeb4-Pagination/JavaWeb4-Pagination.iml" filepath="$PROJECT_DIR$/JavaWeb4-Pagination/JavaWeb4-Pagination.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaWeb5-Mvc/JavaWeb5-Mvc.iml" filepath="$PROJECT_DIR$/JavaWeb5-Mvc/JavaWeb5-Mvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaWeb6-Mvc-reflect/JavaWeb6-Mvc-reflect.iml" filepath="$PROJECT_DIR$/JavaWeb6-Mvc-reflect/JavaWeb6-Mvc-reflect.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaWeb7-Mvc-dispatcherServlet/JavaWeb7-Mvc-dispatcherServlet.iml" filepath="$PROJECT_DIR$/JavaWeb7-Mvc-dispatcherServlet/JavaWeb7-Mvc-dispatcherServlet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaWeb8-Mvc-controller/JavaWeb8-Mvc-controller.iml" filepath="$PROJECT_DIR$/JavaWeb8-Mvc-controller/JavaWeb8-Mvc-controller.iml" />
     </modules>
   </component>
 </project>
