@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/JavaWeb1-Begin/JavaWeb1-Begin.iml" filepath="$PROJECT_DIR$/JavaWeb1-Begin/JavaWeb1-Begin.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaWeb10-Mvc-service/JavaWeb10-Mvc-service.iml" filepath="$PROJECT_DIR$/JavaWeb10-Mvc-service/JavaWeb10-Mvc-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaWeb11-Mvc-service-ioc/JavaWeb11-Mvc-service-ioc.iml" filepath="$PROJECT_DIR$/JavaWeb11-Mvc-service-ioc/JavaWeb11-Mvc-service-ioc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaWeb12-filter/JavaWeb12-filter.iml" filepath="$PROJECT_DIR$/JavaWeb12-filter/JavaWeb12-filter.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaWeb2-Servlet/JavaWeb2-Servlet.iml" filepath="$PROJECT_DIR$/JavaWeb2-Servlet/JavaWeb2-Servlet.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaWeb3-Thymeleaf/JavaWeb3-Thymeleaf.iml" filepath="$PROJECT_DIR$/JavaWeb3-Thymeleaf/JavaWeb3-Thymeleaf.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaWeb4-Pagination/JavaWeb4-Pagination.iml" filepath="$PROJECT_DIR$/JavaWeb4-Pagination/JavaWeb4-Pagination.iml" />
