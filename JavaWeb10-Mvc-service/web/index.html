@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>信息管理页面</title>
+</head>
+<body style="background-color: #cecece">
+<h1 align="center">信息管理系统</h1>
+<div style="background-color: #fff;padding: 100px 0 100px 0;">
+    <table  border="1" cellspacing="0" cellpadding="5" align="center">
+        <tr>
+            <form action="/customer.do" method="post">
+                <td colspan="3" align="center">
+                    <input type="hidden" name="sign" value="search">
+                    <input type="text" name="keyword" th:value="${session.keyword}" >
+                </td>
+                <td>
+                     <input type="submit">
+                    <!--                    <input th:if="not ${session.sign=='search'}" type="submit">-->
+<!--                    <a th:if="${session.sign=='search'}" th:href="@{/customer.do}" >返回</a>-->
+                </td>
+            </form>
+        </tr>
+        <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>密码</th>
+            <th>操作</th>
+        </tr>
+        <tr th:if="${#lists.isEmpty(session.Customers)}">
+            <td colspan="4" style="color: red;text-align: center">
+                对不起，无结果。
+            </td>
+        </tr>
+        <tr  style="text-align: center" th:unless="${#lists.isEmpty(session.Customers)}" th:each="customers:${session.Customers}">
+            <!--        <td><a th:text="${customers.getName()}" th:href="@{'/edit.do?id='+${customers.getId()}}"></a></td>-->
+            <td>
+                <a th:text="${customers.getId()}" th:href="@{/customer.do(id=${customers.getId()},operate='editG')}"></a>
+            </td>
+            <td>
+                <a th:text="${customers.getName()}" th:href="@{/customer.do(id=${customers.getId()},operate='editG')}"></a>
+            </td>
+            <td th:text="${customers.getPassword()}">
+
+            </td>
+            <td>
+                <a th:href="@{/customer.do(id=${customers.getId()},operate='delete')}">删除</a>
+            </td>
+        </tr>
+        <tr>
+            <form th:action="@{/customer.do}" method="post">
+                <td>
+                    <input type="hidden" name="operate" th:value="add">
+                </td>
+                <td>
+                    <input type="text" name="name">
+                </td>
+                <td>
+                    <input type="password" name="password">
+                </td>
+                <td>
+                    <input type="submit" name="" id="" value="添加">
+                </td>
+            </form>
+        </tr>
+
+    </table>
+    <div style="text-align: center;margin-top: 10px">
+        <button th:disabled="${pageN==1}" th:onclick="|ToPageN(1)|">
+            首  页
+        </button>
+        <button th:disabled="${pageN==1}" th:onclick="|ToPageN(${pageN-1})|">
+            上一页
+        </button>
+        <span th:text="${pageN}"></span>
+        <button th:disabled="${pageN==pageL}" th:onclick="|ToPageN(${pageN+1})|">
+            下一页
+        </button>
+        <button th:disabled="${pageN==pageL}" th:onclick="|ToPageN(${pageL})|">
+            尾  页
+        </button>
+    </div>
+</div>
+
+</body>
+<script>
+    function ToPageN(pageN){
+        window.location.href = "/customer.do?pageN="+pageN;
+    }
+</script>
+</html>
