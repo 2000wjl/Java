@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3afd2086-9842-4bb8-acb6-ab937f3334d2" name="腾讯云" url="http://bt2.zyhwjl.cn">
+        <fileTransfer accessType="SFTP" host="bt2.zyhwjl.cn" port="22" sshConfigId="1daceaa4-7184-4a8d-abae-1a5ac524f302" sshConfig="root@bt2.zyhwjl.cn:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

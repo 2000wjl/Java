@@ -31,19 +31,19 @@
                 对不起，无结果。
             </td>
         </tr>
-        <tr  style="text-align: center" th:unless="${#lists.isEmpty(session.Customers)}" th:each="customers:${session.Customers}">
-            <!--        <td><a th:text="${customers.getName()}" th:href="@{'/edit.do?id='+${customers.getId()}}"></a></td>-->
+        <tr  style="text-align: center" th:unless="${#lists.isEmpty(session.Customers)}" th:each="users:${session.Customers}">
+            <!--        <td><a th:text="${users.getName()}" th:href="@{'/edit.do?id='+${users.getId()}}"></a></td>-->
             <td>
-                <a th:text="${customers.getId()}" th:href="@{/customer.do(id=${customers.getId()},operate='editG')}"></a>
+                <a th:text="${users.getId()}" th:href="@{/customer.do(id=${users.getId()},operate='editG')}"></a>
             </td>
             <td>
-                <a th:text="${customers.getName()}" th:href="@{/customer.do(id=${customers.getId()},operate='editG')}"></a>
+                <a th:text="${users.getName()}" th:href="@{/customer.do(id=${users.getId()},operate='editG')}"></a>
             </td>
-            <td th:text="${customers.getPassword()}">
+            <td th:text="${users.getPassword()}">
 
             </td>
             <td>
-                <a th:href="@{/customer.do(id=${customers.getId()},operate='delete')}">删除</a>
+                <a th:href="@{/customer.do(id=${users.getId()},operate='delete')}">删除</a>
             </td>
         </tr>
         <tr>

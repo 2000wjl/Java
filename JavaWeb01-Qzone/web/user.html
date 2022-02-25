@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Qzone</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .topdiv{
+        float: left;
+        width: 100%;
+        height: 200px;
+        background-color: beige;
+        /*border: solid 1px red;*/
+    }
+    .topdiv-qzone{
+        text-align: center;
+        margin-top: 60px;
+    }
+    .topdiv-userinfo{
+        padding-right: 20px;
+        text-align: right;
+        margin-top: 60px;
+        height: 20px;
+    }
+    .context{
+        float: left;
+        width: 100%;
+        height: 700px;
+        /*border: 1px solid blue;*/
+    }
+    .left{
+        padding:20px 20px 20px 30px;
+        background-color: burlywood;
+        width: 30%;
+        height: 600px;
+        float: left;
+        /*border: 1px solid red;*/
+    }
+    .left-list{
+        padding-left: 20px;
+    }
+    .right{
+        width: 70%;
+        min-height: 600px;
+        float: right;
+        background-color: cadetblue;
+        padding-bottom: 50px;
+
+        /*border: 1px solid green;*/
+    }
+    .right-container{
+        width: 80%;
+        margin: 0 auto;
+        min-height: 600px;
+    }
+    .right-container-top{
+        min-height: 100px;
+        width: 100%;
+        float: left;
+    }
+    .right-container-top-text{
+        min-height: 30px;
+        margin-top: 70px;
+        text-align: right;
+    }
+    .footer{
+        width: 100%;
+        height: 100px;
+        line-height: 100px;
+        background-color: #cecece;
+        float: right;
+        /*border: 1px solid green;*/
+        /*background-color: red;*/
+    }
+</style>
+<body>
+<div class="topdiv">
+    <div class="topdiv-qzone">
+        <h1><a th:href="@{/login.do}">Qzone</a></h1>
+    </div>
+    <div class="topdiv-userinfo">
+        <span th:if="${showName}">欢迎来到<span th:text="${showName}"></span>的Qzone! | <a th:href="@{/user.do}">返回我的Qzone</a></span>
+    </div>
+</div>
+<div class="context">
+    <div class="left">
+        <p>我的好友</p>
+        <div class="left-list">
+            <ul th:each="fri:${fris}">
+                <li><a th:href="@{/user.do(showId=${fri.getId()},showName=${fri.getName})}" th:text="${fri.getName()}"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="right">
+        <div class="right-container">
+            <div class="right-container-top">
+                <div class="right-container-top-text">
+                    <a th:href="@{/user.do(operate=newDairy)}">发表新日志</a>
+                </div>
+            </div>
+            <div class="right-container-table">
+                <table border="1" width="100%" style="text-align: center;" th:if="${#strings.isEmpty(showContext)}">
+                    <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(contexts)}">
+                        <td colspan="4" style="color: #ff0000;">
+                            <span th:if="${not #strings.isEmpty(showName)}">对不起，您的好友 <span th:text="${showName}" style="color: black"></span> 暂无日志。</span>
+                            <span th:if="${#strings.isEmpty(showName)}">您暂无日志。</span>
+                        </td>
+                    </tr>
+                    <tr th:each="context:${contexts}">
+                        <td th:text="${context.getId()}">ID</td>
+                        <td>
+                            <a th:text="${context.getTitle()}" th:href="@{/}"></a>
+                        </td>
+                        <td th:text="${context.getDatetime()}">DateTime</td>
+                        <td th:if="${#strings.isEmpty(showName)}">
+                            <a th:href="@{/user.do(id=${context.getId()},operate='delete')}">删除</a>
+                        </td>
+                    </tr>
+                </table>
+                <table border="1" width="100%" style="text-align: center;" th:if="${not #strings.isEmpty(showContext)}">
+                    <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(contexts)}">
+                        <td colspan="4" style="color: #ff0000;">
+                            <span th:if="${not #strings.isEmpty(showName)}">对不起，您的好友 <span th:text="${showName}" style="color: black"></span> 暂无日志。</span>
+                            <span th:if="${#strings.isEmpty(showName)}">您暂无日志。</span>
+                        </td>
+                    </tr>
+                    <tr th:each="context:${contexts}">
+                        <td th:text="${context.getId()}">ID</td>
+                        <td>
+                            <a th:text="${context.getTitle()}" th:href="@{/}"></a>
+                        </td>
+                        <td th:text="${context.getDatetime()}">DateTime</td>
+                        <td th:if="${#strings.isEmpty(showName)}">
+                            <a th:href="@{/user.do(id=${context.getId()},operate='delete')}">删除</a>
+                        </td>
+                    </tr>
+                </table>
+                <table border="1" width="100%" style="text-align: center;" th:if="${not #strings.isEmpty(showContext)}">
+                    <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(contexts)}">
+                        <td colspan="4" style="color: #ff0000;">
+                            <span th:if="${not #strings.isEmpty(showName)}">对不起，您的好友 <span th:text="${showName}" style="color: black"></span> 暂无日志。</span>
+                            <span th:if="${#strings.isEmpty(showName)}">您暂无日志。</span>
+                        </td>
+                    </tr>
+                    <tr th:each="context:${contexts}">
+                        <td th:text="${context.getId()}">ID</td>
+                        <td>
+                            <a th:text="${context.getTitle()}" th:href="@{/}"></a>
+                        </td>
+                        <td th:text="${context.getDatetime()}">DateTime</td>
+                        <td th:if="${#strings.isEmpty(showName)}">
+                            <a th:href="@{/user.do(id=${context.getId()},operate='delete')}">删除</a>
+                        </td>
+                    </tr>
+                </table>
+                <table border="1" width="100%" style="text-align: center;" th:if="${not #strings.isEmpty(showContext)}">
+                    <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(contexts)}">
+                        <td colspan="4" style="color: #ff0000;">
+                            <span th:if="${not #strings.isEmpty(showName)}">对不起，您的好友 <span th:text="${showName}" style="color: black"></span> 暂无日志。</span>
+                            <span th:if="${#strings.isEmpty(showName)}">您暂无日志。</span>
+                        </td>
+                    </tr>
+                    <tr th:each="context:${contexts}">
+                        <td th:text="${context.getId()}">ID</td>
+                        <td>
+                            <a th:text="${context.getTitle()}" th:href="@{/}"></a>
+                        </td>
+                        <td th:text="${context.getDatetime()}">DateTime</td>
+                        <td th:if="${#strings.isEmpty(showName)}">
+                            <a th:href="@{/user.do(id=${context.getId()},operate='delete')}">删除</a>
+                        </td>
+                    </tr>
+                </table>
+                <table border="1" width="100%" style="text-align: center;" th:if="${not #strings.isEmpty(showContext)}">
+                    <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(contexts)}">
+                        <td colspan="4" style="color: #ff0000;">
+                            <span th:if="${not #strings.isEmpty(showName)}">对不起，您的好友 <span th:text="${showName}" style="color: black"></span> 暂无日志。</span>
+                            <span th:if="${#strings.isEmpty(showName)}">您暂无日志。</span>
+                        </td>
+                    </tr>
+                    <tr th:each="context:${contexts}">
+                        <td th:text="${context.getId()}">ID</td>
+                        <td>
+                            <a th:text="${context.getTitle()}" th:href="@{/}"></a>
+                        </td>
+                        <td th:text="${context.getDatetime()}">DateTime</td>
+                        <td th:if="${#strings.isEmpty(showName)}">
+                            <a th:href="@{/user.do(id=${context.getId()},operate='delete')}">删除</a>
+                        </td>
+                    </tr>
+                </table>
+                <table border="1" width="100%" style="text-align: center;" th:if="${not #strings.isEmpty(showContext)}">
+                    <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(contexts)}">
+                        <td colspan="4" style="color: #ff0000;">
+                            <span th:if="${not #strings.isEmpty(showName)}">对不起，您的好友 <span th:text="${showName}" style="color: black"></span> 暂无日志。</span>
+                            <span th:if="${#strings.isEmpty(showName)}">您暂无日志。</span>
+                        </td>
+                    </tr>
+                    <tr th:each="context:${contexts}">
+                        <td th:text="${context.getId()}">ID</td>
+                        <td>
+                            <a th:text="${context.getTitle()}" th:href="@{/}"></a>
+                        </td>
+                        <td th:text="${context.getDatetime()}">DateTime</td>
+                        <td th:if="${#strings.isEmpty(showName)}">
+                            <a th:href="@{/user.do(id=${context.getId()},operate='delete')}">删除</a>
+                        </td>
+                    </tr>
+                </table>
+                <table border="1" width="100%" style="text-align: center;" th:if="${not #strings.isEmpty(showContext)}">
+                    <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(contexts)}">
+                        <td colspan="4" style="color: #ff0000;">
+                            <span th:if="${not #strings.isEmpty(showName)}">对不起，您的好友 <span th:text="${showName}" style="color: black"></span> 暂无日志。</span>
+                            <span th:if="${#strings.isEmpty(showName)}">您暂无日志。</span>
+                        </td>
+                    </tr>
+                    <tr th:each="context:${contexts}">
+                        <td th:text="${context.getId()}">ID</td>
+                        <td>
+                            <a th:text="${context.getTitle()}" th:href="@{/}"></a>
+                        </td>
+                        <td th:text="${context.getDatetime()}">DateTime</td>
+                        <td th:if="${#strings.isEmpty(showName)}">
+                            <a th:href="@{/user.do(id=${context.getId()},operate='delete')}">删除</a>
+                        </td>
+                    </tr>
+                </table>
+                <table border="1" width="100%" style="text-align: center;" th:if="${not #strings.isEmpty(showContext)}">
+                    <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(contexts)}">
+                        <td colspan="4" style="color: #ff0000;">
+                            <span th:if="${not #strings.isEmpty(showName)}">对不起，您的好友 <span th:text="${showName}" style="color: black"></span> 暂无日志。</span>
+                            <span th:if="${#strings.isEmpty(showName)}">您暂无日志。</span>
+                        </td>
+                    </tr>
+                    <tr th:each="context:${contexts}">
+                        <td th:text="${context.getId()}">ID</td>
+                        <td>
+                            <a th:text="${context.getTitle()}" th:href="@{/}"></a>
+                        </td>
+                        <td th:text="${context.getDatetime()}">DateTime</td>
+                        <td th:if="${#strings.isEmpty(showName)}">
+                            <a th:href="@{/user.do(id=${context.getId()},operate='delete')}">删除</a>
+                        </td>
+                    </tr>
+                </table>
+                <table border="1" width="100%" style="text-align: center;" th:if="${not #strings.isEmpty(showContext)}">
+                    <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(contexts)}">
+                        <td colspan="4" style="color: #ff0000;">
+                            <span th:if="${not #strings.isEmpty(showName)}">对不起，您的好友 <span th:text="${showName}" style="color: black"></span> 暂无日志。</span>
+                            <span th:if="${#strings.isEmpty(showName)}">您暂无日志。</span>
+                        </td>
+                    </tr>
+                    <tr th:each="context:${contexts}">
+                        <td th:text="${context.getId()}">ID</td>
+                        <td>
+                            <a th:text="${context.getTitle()}" th:href="@{/}"></a>
+                        </td>
+                        <td th:text="${context.getDatetime()}">DateTime</td>
+                        <td th:if="${#strings.isEmpty(showName)}">
+                            <a th:href="@{/user.do(id=${context.getId()},operate='delete')}">删除</a>
+                        </td>
+                    </tr>
+                </table>
+                <table border="1" width="100%" style="text-align: center;" th:if="${not #strings.isEmpty(showContext)}">
+                    <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(contexts)}">
+                        <td colspan="4" style="color: #ff0000;">
+                            <span th:if="${not #strings.isEmpty(showName)}">对不起，您的好友 <span th:text="${showName}" style="color: black"></span> 暂无日志。</span>
+                            <span th:if="${#strings.isEmpty(showName)}">您暂无日志。</span>
+                        </td>
+                    </tr>
+                    <tr th:each="context:${contexts}">
+                        <td th:text="${context.getId()}">ID</td>
+                        <td>
+                            <a th:text="${context.getTitle()}" th:href="@{/}"></a>
+                        </td>
+                        <td th:text="${context.getDatetime()}">DateTime</td>
+                        <td th:if="${#strings.isEmpty(showName)}">
+                            <a th:href="@{/user.do(id=${context.getId()},operate='delete')}">删除</a>
+                        </td>
+                    </tr>
+                </table>
+                <table border="1" width="100%" style="text-align: center;" th:if="${not #strings.isEmpty(showContext)}">
+                    <tr>
+                        <th>ID</th>
+                        <th>标题</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(contexts)}">
+                        <td colspan="4" style="color: #ff0000;">
+                            <span th:if="${not #strings.isEmpty(showName)}">对不起，您的好友 <span th:text="${showName}" style="color: black"></span> 暂无日志。</span>
+                            <span th:if="${#strings.isEmpty(showName)}">您暂无日志。</span>
+                        </td>
+                    </tr>
+                    <tr th:each="context:${contexts}">
+                        <td th:text="${context.getId()}">ID</td>
+                        <td>
+                            <a th:text="${context.getTitle()}" th:href="@{/}"></a>
+                        </td>
+                        <td th:text="${context.getDatetime()}">DateTime</td>
+                        <td th:if="${#strings.isEmpty(showName)}">
+                            <a th:href="@{/user.do(id=${context.getId()},operate='delete')}">删除</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="footer" align="center">
+        <b>版权所有@<a href="https://www.zyhwjl.cn/">zyhwjl</a></b>
+    </div>
+</div>
+</body>
+</html>

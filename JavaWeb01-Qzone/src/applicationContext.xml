@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans>
+    <bean id="CustomerDao" class="com.zyhwjl.customer.dao.CustomerImpl"/>
+    <bean id="loginDao" class="com.zyhwjl.customer.dao.loginDaoImpl"/>
+    <bean id="contextDao" class="com.zyhwjl.customer.dao.ContextDaoImpl"/>
+    <bean id="userDao" class="com.zyhwjl.customer.dao.UserDaoImpl"/>
+    <bean id="customerService" class="com.zyhwjl.customer.service.impl.CustomerServiceImpl">
+        <!-- property标签用于表示属性，name表示属性名，ref表示引用其他bean的id值。 -->
+        <property name="CustomerDao" ref="CustomerDao"/>
+    </bean>
+    <bean id="loginService" class="com.zyhwjl.customer.service.impl.loginServiceImpl">
+        <!-- property标签用于表示属性，name表示属性名，ref表示引用其他bean的id值。 -->
+        <property name="loginDao" ref="loginDao"/>
+    </bean>
+    <bean id="contextService" class="com.zyhwjl.customer.service.impl.ContextServiceImpl">
+        <property name="contextDao" ref="contextDao"/>
+    </bean>
+    <bean id="userService" class="com.zyhwjl.customer.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean id="customer" class="com.zyhwjl.customer.controller.CustomerController">
+        <property name="customerService" ref="customerService"/>
+    </bean>
+    <bean id="login" class="com.zyhwjl.customer.controller.LoginController">
+        <property name="loginService" ref="loginService"/>
+    </bean>
+    <bean id="register" class="com.zyhwjl.customer.controller.LoginController">
+        <property name="loginService" ref="loginService"/>
+    </bean>
+    <bean id="user" class="com.zyhwjl.customer.controller.UserController">
+        <property name="userService" ref="userService"/>
+        <property name="contextService" ref="contextService"/>
+    </bean>
+</beans>

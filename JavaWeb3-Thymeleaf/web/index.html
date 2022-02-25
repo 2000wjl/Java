@@ -14,16 +14,16 @@
     <tr th:if="${#lists.isEmpty(session.Customers)}">
         <td colspan="3">对不起，无结果。</td>
     </tr>
-    <tr th:unless="${#lists.isEmpty(session.Customers)}" th:each="customers:${session.Customers}">
-        <!--        <td><a th:text="${customers.getName()}" th:href="@{'/edit.do?id='+${customers.getId()}}"></a></td>-->
+    <tr th:unless="${#lists.isEmpty(session.Customers)}" th:each="users:${session.Customers}">
+        <!--        <td><a th:text="${users.getName()}" th:href="@{'/edit.do?id='+${users.getId()}}"></a></td>-->
         <td>
-            <a th:text="${customers.getName()}" th:href="@{/edit.do(id=${customers.getId()})}"></a>
+            <a th:text="${users.getName()}" th:href="@{/edit.do(id=${users.getId()})}"></a>
         </td>
         <td>
-            <a th:text="${customers.getPassword()}" href=""></a>
+            <a th:text="${users.getPassword()}" href=""></a>
         </td>
         <td>
-            <a th:href="@{/delete.do(id=${customers.getId()})}">删除</a>
+            <a th:href="@{/delete.do(id=${users.getId()})}">删除</a>
         </td>
     </tr>
     <tr>

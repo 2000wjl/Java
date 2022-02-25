@@ -1,4 +1,4 @@
-package com.zyhwjl.myssm.io;
+package com.zyhwjl.myssm.ioc;
 
 /**
  * @Description :

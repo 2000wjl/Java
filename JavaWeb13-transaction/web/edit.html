@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>信息编辑</title>
+</head>
+<body>
+    <form action="/customer.do" method="post" th:object="${Customers}">
+        <input type="hidden" name="operate" th:value="editP">
+        <input th:value="*{Id}" name="id"><br>
+        <input th:value="*{Name}" name="name"><br>
+        <input th:value="*{Password}" name="password"><br>
+        <input type="submit" text="同意">
+    </form>
+</body>
+</html>

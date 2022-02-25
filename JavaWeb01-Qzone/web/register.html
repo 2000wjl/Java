@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color: #cecece">
+<div class="panel panel-info" align="center" >
+
+    <div class="panel-heading" align="center" style="height:500px;background-color: cadetblue;width: 60%;padding: 10% 0 20% 0;margin-top: 5%;">
+        <h3>欢迎注册Qzone</h3><br>
+        <form action="/qzone/register.do" method="post">
+            <input type="hidden" name="operate" value="register">
+            <input type="text" name="name" placeholder="请输入用户名" autocomplete="off"><br><br>
+            <input type="password" name="password" placeholder="请输入密码" ><br><br>
+            <input class="btn btn-primary" value="注册" type="submit"><br><br>
+            <a th:href="@{/login.do}">已有帐号？去登录</a>
+        </form>
+        <p  th:text="${flag}" style="color: red"></p>
+    </div>
+</div>
+
+</body>
+</html>

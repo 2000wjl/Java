@@ -1,0 +1,47 @@
+package com.zyhwjl.customer.service.impl;
+
+import com.zyhwjl.customer.dao.CustomerImpl;
+import com.zyhwjl.customer.domain.Customers;
+import com.zyhwjl.customer.service.CustomerService;
+
+import java.util.List;
+
+/**
+ * @Description :
+ * @Author : ZYHWJL E-mail:zyhwjl@zyhwjl.cn
+ * @Date : 2022/2/21 12:13
+ */
+public class CustomerServiceImpl implements CustomerService {
+
+    CustomerImpl CustomerDao = null;
+
+    @Override
+    public List<Customers> getCustomerList(String keyword, Integer pageN) throws Exception {
+        return CustomerDao.queryPage(pageN,keyword);
+    }
+
+    @Override
+    public void addCustomer(Customers customers) throws Exception{
+        CustomerDao.add(customers.getName(),customers.getPassword());
+    }
+
+    @Override
+    public Customers getCustomerById(Integer id) throws Exception {
+        return CustomerDao.query(id);
+    }
+
+    @Override
+    public void delCustomer(Integer id) throws Exception {
+        CustomerDao.delete(id);
+    }
+
+    @Override
+    public Integer getPageCount(String keyword) throws Exception {
+        return CustomerDao.queryAll(keyword).size()/5+1;
+    }
+
+    @Override
+    public void updateCustomer(Customers customers) throws Exception {
+        CustomerDao.update(customers.getName(),customers.getPassword(),customers.getId());
+    }
+}

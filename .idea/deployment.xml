@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="腾讯云">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/www/wwwroot/zyhwjl" local="$PROJECT_DIR$/JavaWeb7-Mvc-dispatcherServlet" web="/" />
+            <mapping deploy="/www/wwwroot/zyhwjl" local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/JavaWeb10-Mvc-service" />
+            <mapping local="$PROJECT_DIR$/JavaWeb9-Servlet-api" />
+            <mapping local="$PROJECT_DIR$/JavaWeb2-Servlet" />
+            <mapping local="$PROJECT_DIR$/JavaWeb1-Begin" />
+            <mapping local="$PROJECT_DIR$/JavaWeb13-transaction" />
+            <mapping local="$PROJECT_DIR$/JavaWeb3-Thymeleaf" />
+            <mapping local="$PROJECT_DIR$/JavaWeb8-Mvc-controller" />
+            <mapping local="$PROJECT_DIR$/JDBC1" />
+            <mapping local="$PROJECT_DIR$/JDBC2" />
+            <mapping local="$PROJECT_DIR$/JavaWeb12-filter" />
+            <mapping local="$PROJECT_DIR$/JavaWeb6-Mvc-reflect" />
+            <mapping local="$PROJECT_DIR$/JavaWeb01-Qzone" />
+            <mapping local="$PROJECT_DIR$/JavaWeb5-Mvc" />
+            <mapping local="$PROJECT_DIR$/JavaWeb4-Pagination" />
+            <mapping local="$PROJECT_DIR$/JavaWeb11-Mvc-service-ioc" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

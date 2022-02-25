@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans>
+    <bean id="CustomerDao" class="com.zyhwjl.customer.dao.CustomerImpl"/>
+    <bean id="customerService" class="com.zyhwjl.customer.service.impl.CustomerServiceImpl">
+        <!-- property标签用于表示属性，name表示属性名，ref表示引用其他bean的id值。 -->
+        <property name="CustomerDao" ref="CustomerDao"/>
+    </bean>
+    <bean id="customer" class="com.zyhwjl.customer.controller.CustomerController">
+        <property name="customerService" ref="customerService"/>
+    </bean>
+</beans>

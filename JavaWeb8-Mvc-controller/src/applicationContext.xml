@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans>
-    <bean id="customer" class="com.zyhwjl.customers.controllers.CustomerController"/>
+    <bean id="customer" class="com.zyhwjl.users.controllers.CustomerController"/>
 </beans>

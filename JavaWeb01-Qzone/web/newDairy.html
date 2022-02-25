@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Qzone</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div style="width: 80%;background-color: cadetblue;margin: 0 auto;text-align: center;padding: 20%">
+    <form action="/qzone/user.do" method="post">
+        <input type="hidden" name="operate" value="newDairy">
+        <input type="text" name="title" placeholder="请输入标题"><br><br>
+        <input type="submit" value="发布">
+    </form>
+</div>
+</body>
+</html>
